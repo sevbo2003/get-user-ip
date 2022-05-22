@@ -1,15 +1,16 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 
 class Information(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    client = models.TextField()
-    ip = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
+    city = models.CharField(max_length=64)
+    org = models.CharField(max_length=128)
+    user_agent = models.TextField()
+    client_ip = models.CharField(max_length=64)
+
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return self.ip
+        return f"<Information({self.client_ip})>"
 
     class Meta:
-        ordering = ['-created']
+        ordering = ['-created_at']
