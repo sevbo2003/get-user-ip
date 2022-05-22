@@ -13,7 +13,8 @@ def home(request):
         return ip
     client_address = request.META.get("HTTP_USER_AGENT")
     inf = Information()
-    inf.user = request.user
+    if request.user.is_authenticated:
+        inf.user = request.user
     inf.client = client_address
     inf.ip = get_client_ip(request)
     inf.save()
